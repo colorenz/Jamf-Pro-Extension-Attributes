@@ -13,13 +13,13 @@ if [[ -e "/Users/$loggedInUser/Library/Preferences/MobileMeAccounts.plist" ]]; t
 	iCloudStatus=$("$plistBud" -c "print :Accounts:0:LoggedIn" /Users/$loggedInUser/Library/Preferences/MobileMeAccounts.plist 2> /dev/null )
 
 	if [[ "$iCloudStatus" = "true" ]]; then
-		iCloudStatus="Enabled"
+		iCloudStatus="true"
 	fi
 	if [[ "$iCloudStatus" = "false" ]] || [[ -z "$iCloudStatus" ]]; then
-		iCloudStatus="Disabled"
+		iCloudStatus="false"
 	fi
 else
-	iCloudStatus="Disabled"
+	iCloudStatus="false"
 fi
 
 /bin/echo "<result>$iCloudStatus</result>"
