@@ -4,7 +4,8 @@
 # Values will be the "Display Name, Apple ID address" or "Disabled"
 
 #Determine logged in user
-loggedInUser=$(python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");')
+loggedInUser=$(/usr/sbin/scutil <<<"show State:/Users/ConsoleUser" | awk '/Name :/ { print $3 }')
+
 
 if [[ -e "/Users/$loggedInUser/Library/Preferences/MobileMeAccounts.plist" ]]; then
 	#Path to PlistBuddy
